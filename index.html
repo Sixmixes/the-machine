@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://spacejamz.sixmixes.com/">
-    <meta property="og:title" content="SPACEJAMZ | PRODUCTION WAREHOUSE">
-    <meta property="og:description" content="No Output Without Input. Join the Meritocracy. We bridge the gap between AI velocity and Human soul.">
+    <meta property="og:url" content="[https://spacejamz.sixmixes.com/](https://spacejamz.sixmixes.com/)">
+    <meta property="og:title" content="SPACEJAMZ | THE ASSET FACTORY">
+    <meta property="og:description" content="AI Velocity. Human Soul. The Bag. Join the daily sample flips and get paid.">
     
-    <meta property="og:image" content="https://www.sixmixes.com/images/artwork/spacejamz-logo.jpg">
+    <meta property="og:image" content="[https://www.sixmixes.com/images/artwork/spacejamz-logo.jpg](https://www.sixmixes.com/images/artwork/spacejamz-logo.jpg)">
     
     <meta name="theme-color" content="#bc13fe">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPACEJAMZ | PRODUCTION WAREHOUSE</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>SPACEJAMZ | THE ASSET FACTORY</title>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <link href="[https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap](https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap)" rel="stylesheet">
     <style>
         :root {
             --cyber-blue: #00f2ff;
@@ -35,8 +35,17 @@
         }
 
         .glass-panel {
-            background: rgba(10, 10, 12, 0.7); backdrop-filter: blur(8px);
+            background: rgba(10, 10, 12, 0.8); backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .zone-card {
+            transition: all 0.3s ease;
+        }
+        .zone-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(0, 242, 255, 0.1);
+            border-color: rgba(0, 242, 255, 0.3);
         }
     </style>
 </head>
@@ -49,26 +58,29 @@
         <div class="absolute inset-0 bg-black/70"></div>
     </div>
 
+    <canvas id="bgCanvas"></canvas>
     <div class="scanlines"></div>
 
-    <header class="fixed top-0 left-0 w-full z-40 border-b border-white/5 bg-black/80 backdrop-blur-md">
+    <header class="fixed top-0 left-0 w-full z-40 border-b border-white/5 bg-black/90 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-2">
                 <div class="w-6 h-6 bg-cyan-400 rotate-45 animate-pulse"></div>
                 <span class="font-header text-3xl tracking-widest text-white">SPACE<span class="text-cyan-400">JAMZ</span></span>
             </div>
-            <nav class="hidden md:flex space-x-10 text-sm tracking-[0.2em] font-bold uppercase">
-                <a href="#mission" class="hover:text-purple-400 transition">Mission</a>
-                <a href="#culture" class="hover:text-cyan-400 transition">Protocol</a>
-                <a href="#join" class="border border-pink-500 text-pink-500 px-4 py-1 hover:bg-pink-500 hover:text-white transition">Initialize</a>
+            <nav class="hidden md:flex space-x-8 text-sm tracking-[0.2em] font-bold uppercase">
+                <a href="#factory" class="hover:text-purple-400 transition">Factory</a>
+                <a href="#zones" class="hover:text-cyan-400 transition">Zones</a>
+                <a href="#protocol" class="hover:text-pink-500 transition">The Bag</a>
+                <a href="#join" class="border border-cyan-500 text-cyan-500 px-4 py-1 hover:bg-cyan-500 hover:text-black transition">Initialize</a>
             </nav>
         </div>
     </header>
 
     <section class="min-h-screen flex items-center justify-center pt-20 px-6 relative">
-        <div class="relative z-10 max-w-5xl text-center">
-            <div class="inline-block px-3 py-1 mb-6 border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs tracking-[0.3em] uppercase">
-                System Status: Online // Warehouse Active
+        <div class="relative z-10 max-w-6xl text-center">
+            <div class="inline-flex items-center gap-3 px-4 py-1 mb-8 border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs tracking-[0.3em] uppercase">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                System Status: V4.0 // Daily Flips Active
             </div>
             
             <h1 class="font-header text-6xl md:text-9xl leading-[0.85] text-white mb-8">
@@ -78,77 +90,170 @@
                 </span>
             </h1>
             
-            <p class="text-lg md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed border-l-2 border-cyan-400 pl-6">
-                SpaceJamz is not a server. It is a <span class="text-white font-bold">Production Warehouse</span>. 
-                <br>We bridge the gap between AI velocity and Human soul.
+            <p class="text-lg md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed border-l-4 border-cyan-400 pl-6 text-left md:text-center">
+                AI Velocity. Human Soul. <span class="text-white font-bold">The Bag.</span>
+                <br>We don't just make music. We manufacture assets.
             </p>
 
-            <a href="https://discord.gg/uT8UtWcJs4" target="_blank" class="group relative inline-block px-10 py-5 bg-cyan-400 text-black font-header text-2xl uppercase tracking-widest overflow-hidden hover:bg-white transition-colors shadow-[0_0_30px_rgba(0,242,255,0.4)]">
-                <span class="relative z-10">ENTER THE AIRLOCK</span>
-            </a>
-        </div>
-    </section>
-
-    <section id="mission" class="py-32 px-6 border-y border-white/5 bg-zinc-900/20">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
-            <div class="glass-panel p-10 border-t-4 border-t-purple-500 relative group hover:-translate-y-2 transition-transform duration-500">
-                <div class="absolute top-4 right-4 text-4xl opacity-10 font-header">01</div>
-                <h3 class="font-header text-4xl text-white mb-4" data-value="PATH A: DRAFTING">PATH A: DRAFTING</h3>
-                <p class="text-gray-400 text-lg">We use generative audio to sketch. We rapid-prototype melodies, flows, and structures at the speed of thought. The machine provides the clay.</p>
-            </div>
-            <div class="glass-panel p-10 border-t-4 border-t-green-500 relative group hover:-translate-y-2 transition-transform duration-500">
-                <div class="absolute top-4 right-4 text-4xl opacity-10 font-header">02</div>
-                <h3 class="font-header text-4xl text-white mb-4" data-value="PATH B: RELEASE">PATH B: RELEASE</h3>
-                <p class="text-gray-400 text-lg">We strip the robot voice away. Real humans record real vocals. Real engineers mix the stems. The final product is 100% organic, designed by the machine.</p>
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                <a href="[https://discord.gg/uT8UtWcJs4](https://discord.gg/uT8UtWcJs4)" target="_blank" class="group relative inline-block px-10 py-5 bg-cyan-400 text-black font-header text-2xl uppercase tracking-widest overflow-hidden hover:bg-white transition-colors shadow-[0_0_30px_rgba(0,242,255,0.4)]">
+                    <span class="relative z-10">ENTER THE ARENA</span>
+                </a>
+                <span class="text-gray-500 font-mono text-xs tracking-widest uppercase">
+                    Daily Cash Prizes Active // No AI Gen Allowed
+                </span>
             </div>
         </div>
     </section>
 
-    <section id="culture" class="py-32 px-6">
+    <section id="factory" class="py-32 px-6 border-y border-white/5 bg-zinc-900/30">
+        <div class="max-w-7xl mx-auto mb-16 text-center">
+            <h2 class="font-header text-5xl md:text-7xl text-white mb-4" data-value="THE ASSET FACTORY">THE ASSET FACTORY</h2>
+            <p class="text-xl text-gray-500 tracking-widest uppercase">The Pipeline to Monetization</p>
+        </div>
+
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+            <div class="glass-panel p-8 border-t-4 border-t-cyan-500 relative group hover:-translate-y-2 transition-transform duration-500">
+                <div class="absolute top-4 right-4 text-6xl opacity-10 font-header text-white">01</div>
+                <h3 class="font-header text-3xl text-cyan-400 mb-2">RAW MATERIAL</h3>
+                <h4 class="text-xs font-mono text-gray-500 mb-4 tracking-widest">LOCATION: THE LAB</h4>
+                <p class="text-gray-400 leading-relaxed">Velocity is key. We generate 100+ raw ideas per week using AI acceleration. Quantity over perfection. The machine provides the clay; you provide the hands.</p>
+            </div>
+
+            <div class="glass-panel p-8 border-t-4 border-t-purple-500 relative group hover:-translate-y-2 transition-transform duration-500">
+                <div class="absolute top-4 right-4 text-6xl opacity-10 font-header text-white">02</div>
+                <h3 class="font-header text-3xl text-purple-400 mb-2">VALIDATION</h3>
+                <h4 class="text-xs font-mono text-gray-500 mb-4 tracking-widest">LOCATION: THE ARENA</h4>
+                <p class="text-gray-400 leading-relaxed">Quality Control. The community votes. Only the top 5% of outputs survive. Daily Sample Flips prove who the real producers are.</p>
+            </div>
+
+            <div class="glass-panel p-8 border-t-4 border-t-green-500 relative group hover:-translate-y-2 transition-transform duration-500">
+                <div class="absolute top-4 right-4 text-6xl opacity-10 font-header text-white">03</div>
+                <h3 class="font-header text-3xl text-green-400 mb-2">THE MINT</h3>
+                <h4 class="text-xs font-mono text-gray-500 mb-4 tracking-widest">LOCATION: THE BANK</h4>
+                <p class="text-gray-400 leading-relaxed">Monetization. The survivors are polished, mastered, and distributed. Streaming, Sync Licensing, and Sample Packs. We all get the bag.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="zones" class="py-32 px-6">
         <div class="max-w-7xl mx-auto text-center mb-20">
-            <h2 class="font-header text-6xl md:text-8xl text-white mb-4" data-value="THE MERITOCRACY">THE MERITOCRACY</h2>
-            <p class="text-xl text-pink-500 tracking-widest uppercase">"No Output Without Input."</p>
+            <h2 class="font-header text-6xl md:text-8xl text-white mb-4" data-value="SERVER TOPOGRAPHY">SERVER TOPOGRAPHY</h2>
+            <p class="text-xl text-pink-500 tracking-widest uppercase">"Dynamic Architecture Implemented"</p>
         </div>
 
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-3 gap-1">
-            <div class="bg-zinc-900/50 p-12 border border-white/5 group hover:bg-zinc-800 transition-colors">
-                <h4 class="text-cyan-400 mb-4 tracking-widest text-sm">01 // OPEN ACCESS</h4>
-                <h3 class="font-header text-5xl text-white mb-6">THE LOBBY</h3>
-                <p class="text-gray-400">The neutral zone. Submit your portfolio, show your hunger, and prove your worth here.</p>
+        <div class="max-w-8xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="zone-card bg-zinc-900/40 p-8 border border-white/5">
+                <h4 class="text-cyan-400 mb-2 tracking-widest text-xs font-bold">ZONE 01</h4>
+                <h3 class="font-header text-4xl text-white mb-4">THE LOBBY</h3>
+                <p class="text-gray-400 text-sm">Intake and Comms. The 'Town Hall' (#main-chat) and Command Center (#bot-commands). Initialize your journey here.</p>
             </div>
-            <div class="bg-zinc-900 p-12 border border-cyan-500/30 group relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-purple-500"></div>
-                <h4 class="text-purple-400 mb-4 tracking-widest text-sm">02 // RESTRICTED</h4>
-                <h3 class="font-header text-5xl text-white mb-6">THE FACTORY</h3>
-                <p class="text-gray-200">Where the work happens. Forged in collaboration. Only high-signal contributors remain.</p>
+
+            <div class="zone-card bg-zinc-900/60 p-8 border border-purple-500/30 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-cyan-500"></div>
+                <h4 class="text-purple-400 mb-2 tracking-widest text-xs font-bold">ZONE 02</h4>
+                <h3 class="font-header text-4xl text-white mb-4">THE LAB</h3>
+                <p class="text-gray-300 text-sm">The Production Engine. Producers cook here. Use <code>initialize-studio</code> to spawn a temp workspace.</p>
             </div>
-            <div class="bg-black p-12 border border-white/5 group grayscale hover:grayscale-0 transition-all">
-                <h4 class="text-pink-500 mb-4 tracking-widest text-sm">03 // PURGE ZONE</h4>
-                <h3 class="font-header text-5xl text-white mb-6 opacity-50">THE BENCH</h3>
-                <p class="text-gray-500">Silence is a choice. Lack of input leads to disconnection. Reclaim your seat or be purged.</p>
+
+            <div class="zone-card bg-zinc-900/40 p-8 border border-pink-500/30">
+                <h4 class="text-pink-500 mb-2 tracking-widest text-xs font-bold">ZONE 03</h4>
+                <h3 class="font-header text-4xl text-white mb-4">THE ARENA</h3>
+                <p class="text-gray-400 text-sm">The Proving Ground. Home of the <strong>Daily Flip</strong>. If it's not posted in #daily-logs, it didn't happen.</p>
+            </div>
+
+            <div class="zone-card bg-zinc-900/40 p-8 border border-white/5">
+                <h4 class="text-yellow-400 mb-2 tracking-widest text-xs font-bold">ZONE 04</h4>
+                <h3 class="font-header text-4xl text-white mb-4">THE CYPHER</h3>
+                <p class="text-gray-400 text-sm">The Flow State. Freestyle bars and rhymes. Spawn a stage with <code>initialize-cypher</code>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="protocol" class="py-32 px-6 bg-black border-y border-white/10 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-green-900/10 to-transparent pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-header text-6xl md:text-8xl text-white mb-4" data-value="THE BAG PROTOCOL">THE BAG PROTOCOL</h2>
+                <p class="text-lg text-green-400 font-mono uppercase tracking-widest">Revenue Split Designation (v4.0)</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        SpaceJamz releases are divided into <span class="text-white font-bold">100 points</span>. We utilize a transparent, fixed split model to ensure every contributor gets paid.
+                    </p>
+                    <div class="p-6 border border-white/10 bg-white/5 backdrop-blur-sm">
+                        <h4 class="text-white font-bold uppercase tracking-widest mb-2">The Kickback Clause</h4>
+                        <p class="text-sm text-gray-400">If an in-house instrumental is used, the Producer's 22% is <span class="text-green-400">redistributed</span> to the Artist and Songwriter.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 font-mono text-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-24 text-right text-gray-500">AI PILOT</div>
+                        <div class="flex-1 h-8 bg-zinc-800 relative">
+                            <div class="absolute top-0 left-0 h-full bg-purple-600" style="width: 24%;"></div>
+                            <span class="absolute inset-0 flex items-center justify-end px-2 text-white font-bold">24%</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-24 text-right text-gray-500">ARTIST</div>
+                        <div class="flex-1 h-8 bg-zinc-800 relative">
+                            <div class="absolute top-0 left-0 h-full bg-cyan-500" style="width: 22%;"></div>
+                            <span class="absolute inset-0 flex items-center justify-end px-2 text-white font-bold">22%</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-24 text-right text-gray-500">WRITER</div>
+                        <div class="flex-1 h-8 bg-zinc-800 relative">
+                            <div class="absolute top-0 left-0 h-full bg-cyan-600" style="width: 22%;"></div>
+                            <span class="absolute inset-0 flex items-center justify-end px-2 text-white font-bold">22%</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-24 text-right text-gray-500">PRODUCER</div>
+                        <div class="flex-1 h-8 bg-zinc-800 relative">
+                            <div class="absolute top-0 left-0 h-full bg-cyan-700" style="width: 22%;"></div>
+                            <span class="absolute inset-0 flex items-center justify-end px-2 text-white font-bold">22%</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-24 text-right text-gray-500">FUND</div>
+                        <div class="flex-1 h-8 bg-zinc-800 relative">
+                            <div class="absolute top-0 left-0 h-full bg-zinc-600" style="width: 10%;"></div>
+                            <span class="absolute inset-0 flex items-center justify-end px-2 text-white font-bold">10%</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="join" class="py-40 px-6 relative overflow-hidden flex items-center justify-center">
-        <div class="relative z-10 glass-panel p-12 md:p-20 text-center max-w-4xl border border-white/10">
-            <h2 class="font-header text-6xl md:text-8xl text-white mb-10 tracking-tighter" data-value="JOIN THE SEQUENCE">
-                JOIN THE SEQUENCE
+        <div class="relative z-10 glass-panel p-12 md:p-20 text-center max-w-4xl border border-white/10 shadow-2xl shadow-purple-900/20">
+            <h2 class="font-header text-6xl md:text-8xl text-white mb-6 tracking-tighter" data-value="INITIATE SEQUENCE">
+                INITIATE SEQUENCE
             </h2>
+            <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+                Requirements: Active Distribution (DistroKid/TuneCore) + Original Works Only.
+                <br><span class="text-white">Real Producers Only. No Prompt Jockeys.</span>
+            </p>
             
-            <a href="https://discord.gg/uT8UtWcJs4" target="_blank" class="block w-full py-6 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-white hover:to-white hover:text-black text-white font-header text-3xl uppercase tracking-widest transition-all duration-300 shadow-[0_0_30px_rgba(0,242,255,0.3)]">
-                LAUNCH DISCORD
+            <a href="[https://discord.gg/uT8UtWcJs4](https://discord.gg/uT8UtWcJs4)" target="_blank" class="block w-full py-6 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-white hover:to-white hover:text-black text-white font-header text-3xl uppercase tracking-widest transition-all duration-300 shadow-[0_0_30px_rgba(0,242,255,0.3)]">
+                JOIN THE DISCORD
             </a>
             
             <div class="mt-8 flex justify-center gap-8 text-xs font-mono text-gray-500 uppercase tracking-widest">
-                <span>Status: Recruitment Active</span>
-                <span>Req: Proof of Life</span>
+                <span>Next Flip: TODAY</span>
+                <span>Prize Pool: ACTIVE</span>
             </div>
         </div>
     </section>
 
-    <footer class="py-8 text-center text-xs text-gray-600 font-mono border-t border-white/5">
-        SPACEJAMZ VISUAL SUITE // EST 2026
+    <footer class="py-8 text-center text-xs text-gray-600 font-mono border-t border-white/5 bg-black">
+        SPACEJAMZ VISUAL SUITE // EST 2026 // SIXMIXES
     </footer>
 
     <script src="script.js"></script>
