@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPACEJAMZ | THE DOCTRINE</title>
+    <title>SPACEJAMZ | THE ARENA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #050505; color: #e2e8f0; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; margin: 0; }
+        /* True Black Background for maximum contrast */
+        body { background-color: #000000; color: #e2e8f0; font-family: 'Rajdhani', sans-serif; margin: 0; }
         .font-header { font-family: 'Bebas Neue', sans-serif; }
         
+        /* GLOBAL WARP DRIVE BACKGROUND */
+        #warpCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; 
+            pointer-events: none;
+        }
+
+        /* HIGH-CONTRAST VELOCITY GRADIENT */
         .velocity-text { 
-            background: linear-gradient(90deg, #00f2ff, #bc13fe, #ff003c, #00f2ff);
+            background: linear-gradient(90deg, #ffffff, #00d4ff, #4e54c8, #ffffff);
             background-size: 300% 100%;
-            animation: flow 4s linear infinite;
+            animation: flow 5s linear infinite;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            /* Critical fix for Italic 'Y' clipping */
             display: table; 
             margin: 0 auto;
-            padding-right: 0.25em; 
-            line-height: 1.1;
-        }
-
-        .hero-divider {
-            width: 560px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.3);
-            margin: 1.5rem auto;
+            padding-right: 0.35em; 
+            line-height: 0.9; 
+            overflow: visible;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.4));
         }
         
         @keyframes flow {
@@ -36,90 +43,320 @@
             100% { background-position: 100% 50%; }
         }
 
-        #warpCanvas {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0;
-            pointer-events: none;
+        .glass-panel { 
+            background: rgba(5, 8, 15, 0.85); 
+            backdrop-filter: blur(16px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2) 100%);
+            background-size: 100% 4px; pointer-events: none; z-index: 50; opacity: 0.08;
         }
 
-        .glass-panel { background: rgba(15, 15, 20, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .neon-glow {
+            filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.6));
+        }
+
+        .chrome-text {
+            color: #ffffff;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Floating Animation Class */
+        .floating-logo {
+            will-change: transform;
+            transition: transform 0.1s ease-out;
+            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.2));
+        }
+
+        .arena-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .arena-card:hover {
+            border-color: rgba(0, 212, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .belt-rank {
+            background: linear-gradient(135deg, #1e1e1e 0%, #000000 100%);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
     </style>
 </head>
 <body class="selection:bg-cyan-500 selection:text-black">
+    <div class="scanlines"></div>
 
-    <header class="fixed top-0 left-0 w-full z-40 bg-black/80 backdrop-blur-md border-b border-white/5 h-20 flex items-center">
+    <!-- GLOBAL CANVAS -->
+    <canvas id="warpCanvas"></canvas>
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 w-full z-40 bg-black/60 backdrop-blur-lg border-b border-white/10 h-20 flex items-center">
         <div class="max-w-7xl mx-auto px-6 w-full flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <div class="w-6 h-6 bg-cyan-400 rotate-45 animate-pulse"></div>
-                <span class="font-header text-3xl tracking-widest text-white uppercase">Space<span class="text-cyan-400">Jamz</span></span>
+                <div class="w-6 h-6 bg-white rotate-45 animate-pulse shadow-[0_0_15px_#fff]"></div>
+                <span class="font-header text-3xl tracking-widest text-white uppercase italic">Space<span class="text-cyan-400">Jamz</span></span>
             </div>
-            <nav class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                <a href="#doctrine" class="hover:text-cyan-400 transition">The Doctrine</a>
-                <a href="#contact" class="hover:text-pink-400 transition">Contact</a>
-                <a href="https://discord.gg/spacejamz" target="_blank" class="text-white border border-white/20 px-4 py-1 hover:bg-white hover:text-black transition">Apply</a>
+            <nav class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <a href="#arena" class="hover:text-cyan-400 transition">⚔️ The Arena</a>
+                <a href="#ranks" class="hover:text-indigo-400 transition">🏆 Ranks</a>
+                <a href="#philosophy" class="hover:text-white transition">Soul & Velocity</a>
+                <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
+                <a href="https://discord.gg/spacejamz" target="_blank" class="text-white border border-white/20 px-4 py-1 hover:bg-white hover:text-black transition">Join Discord</a>
             </nav>
         </div>
     </header>
 
-    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative bg-black">
-        <canvas id="warpCanvas"></canvas>
-        
-        <div class="max-w-7xl z-10 pointer-events-none">
-            <div class="inline-block px-4 py-1 mb-8 border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-[10px] tracking-[0.4em] uppercase font-bold">
-                SYSTEM STATUS: v1.9 // ALL-GREEN
+    <!-- 🚀 NEW HERO SECTION: FLOATING LOGO / SAMPLE FLIPS -->
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative bg-transparent">
+        <div class="max-w-7xl z-10 w-full">
+            <div class="inline-block px-4 py-1 mb-6 border border-white/30 bg-white/5 text-white text-[10px] tracking-[0.4em] uppercase font-bold">
+                COMMUNITY HUB: v1.9 // LIVE
             </div>
             
-            <h1 class="font-header text-7xl md:text-[11rem] leading-none text-white tracking-tighter uppercase">
-                HUMAN SOUL
-                <div class="hero-divider"></div>
-                <span class="velocity-text italic">AI VELOCITY</span>
+            <!-- FLOATING CHROME LOGO -->
+            <div id="logoContainer" class="floating-logo mb-[-2rem] flex justify-center">
+                <img src="images/logo cosmos.jpg" alt="SPACEJAMZ" class="w-full max-w-[600px] md:max-w-[850px] h-auto pointer-events-none" onerror="this.src='https://placehold.co/800x300/000000/ffffff?text=SPACEJAMZ+LOGO'">
+            </div>
+
+            <!-- COMPACT DIVIDER -->
+            <div class="w-full max-w-[850px] mx-auto my-[-10px] neon-glow opacity-90">
+                <svg width="100%" height="60" viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="cyberGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                            <stop offset="30%" style="stop-color:#00d4ff;stop-opacity:1" />
+                            <stop offset="70%" style="stop-color:#4e54c8;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <g stroke="url(#cyberGrad)" fill="none" stroke-width="2.5" stroke-linecap="square">
+                        <polyline points="30,35 10,50 30,65" stroke-width="4"/>
+                        <polyline points="60,38 40,50 60,62" /><polyline points="90,38 70,50 90,62" /><polyline points="120,38 100,50 120,62" /><polyline points="150,38 130,50 150,62" /><polyline points="180,38 160,50 180,62" /><polyline points="210,38 190,50 210,62" /><polyline points="240,38 220,50 240,62" /><polyline points="270,38 250,50 270,62" /><polyline points="300,38 280,50 300,62" /><polyline points="330,38 310,50 330,62" /><polyline points="360,35 340,50 360,65" stroke-width="4"/>
+                        <g>
+                            <path d="M360,50 Q400,15 440,50 Q400,85 360,50 Z" stroke-width="2.5" />
+                            <circle cx="400" cy="50" r="14" stroke-width="1.5" stroke-dasharray="2,2" />
+                            <circle cx="400" cy="50" r="5" fill="url(#cyberGrad)" stroke="none" />
+                        </g>
+                        <polyline points="440,35 460,50 440,65" stroke-width="4"/><polyline points="470,38 490,50 470,62" /><polyline points="500,38 520,50 500,62" /><polyline points="530,38 550,50 530,62" /><polyline points="560,38 580,50 560,62" /><polyline points="590,38 610,50 590,62" /><polyline points="620,38 640,50 620,62" /><polyline points="650,38 670,50 650,62" /><polyline points="680,38 700,50 680,62" /><polyline points="710,38 730,50 710,62" /><polyline points="740,38 760,50 740,62" /><polyline points="770,35 790,50 770,65" stroke-width="4"/>
+                    </g>
+                </svg>
+            </div>
+
+            <h1 class="font-header text-7xl md:text-[11.5rem] leading-[0.85] tracking-tighter uppercase mt-[-1rem]">
+                <span class="velocity-text italic">SAMPLE FLIPS</span>
             </h1>
             
-            <p class="text-xl md:text-3xl text-gray-500 max-w-3xl mx-auto italic leading-relaxed pt-8">
-                We aren't replacing artists.<br>
-                <span class="text-white font-bold opacity-80">We are giving them a Supersonic Pipeline.</span>
+            <p class="text-xl md:text-3xl text-gray-400 max-w-3xl mx-auto italic leading-relaxed pt-12 font-light">
+                High-octane unranked nights.<br>
+                <span class="text-white font-bold opacity-100">Prove your <span class="text-cyan-400">Human Soul</span> in the refinery.</span>
             </p>
         </div>
     </section>
 
-    <section id="doctrine" class="py-32 px-6 bg-[#0a0a0c] border-y border-white/5 relative z-10">
-        <div class="max-w-5xl mx-auto">
-             <h2 class="font-header text-6xl text-white mb-16 tracking-tighter underline decoration-cyan-500 decoration-8">THE DOCTRINE</h2>
-             <div class="grid md:grid-cols-2 gap-16 text-gray-400">
-                <p>AI is the next great instrument—a high-velocity sampler.</p>
-                <p>You keep 66% of the Bag. Built for creators.</p>
-             </div>
+    <!-- ⚔️ THE ARENA SECTION -->
+    <section id="arena" class="py-32 px-6 relative z-10 border-t border-white/10">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-16">
+                <div>
+                    <h2 class="font-header text-6xl text-white tracking-tighter uppercase leading-none">⚔️ The Arena</h2>
+                    <p class="text-cyan-400 font-mono text-[10px] mt-2 uppercase tracking-[0.5em]">Daily_Unranked_Nights // 2.5H_Limit</p>
+                </div>
+                <div class="mt-4 md:mt-0 px-4 py-2 bg-white/5 border border-white/10 rounded-full flex items-center gap-3">
+                    <div class="w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
+                    <span class="text-[10px] font-bold text-white uppercase tracking-widest">Next Drop: Tonight 9PM EST</span>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Current Sample Vote -->
+                <div class="lg:col-span-2 glass-panel p-10 rounded-[3rem] border-l-4 border-l-cyan-400">
+                    <h3 class="font-header text-3xl text-white mb-2 uppercase italic">Weekly Theme Vote</h3>
+                    <p class="text-gray-500 text-xs uppercase tracking-widest mb-8 font-mono">Split decision = Double Drop Protocol</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div onclick="castVote('A')" class="arena-card p-8 bg-black rounded-[2rem] border border-white/5 cursor-pointer relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-all"><span class="text-4xl font-black italic text-cyan-400">A</span></div>
+                            <h4 class="text-white font-bold uppercase text-xl mb-2">Gritty 90s Soul</h4>
+                            <p class="text-gray-500 text-xs leading-relaxed">Heavy vocal chops, high crackle, dusty texture.</p>
+                            <div class="mt-6 h-1 w-full bg-white/5 rounded-full overflow-hidden"><div id="voteBarA" class="h-full bg-cyan-400 transition-all duration-500" style="width: 45%"></div></div>
+                        </div>
+                        <div onclick="castVote('B')" class="arena-card p-8 bg-black rounded-[2rem] border border-white/5 cursor-pointer relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-all"><span class="text-4xl font-black italic text-indigo-400">B</span></div>
+                            <h4 class="text-white font-bold uppercase text-xl mb-2">Cosmic Synthetic</h4>
+                            <p class="text-gray-500 text-xs leading-relaxed">Analog leads, wide pads, hyper-modern rhythm.</p>
+                            <div class="mt-6 h-1 w-full bg-white/5 rounded-full overflow-hidden"><div id="voteBarB" class="h-full bg-indigo-400 transition-all duration-500" style="width: 55%"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 p-6 bg-white/5 rounded-2xl border border-dashed border-white/10 text-center">
+                        <p class="text-[10px] text-gray-500 uppercase tracking-[0.4em] mb-2 font-mono">Current_Handicap_Rule</p>
+                        <p class="text-white font-bold uppercase tracking-widest italic">"No External Drum Kits - Stock Samples Only"</p>
+                    </div>
+                </div>
+
+                <!-- Arena Stats -->
+                <div id="ranks" class="space-y-8">
+                    <div class="glass-panel p-8 rounded-[2.5rem] border-l-4 border-l-indigo-400 h-full flex flex-col">
+                        <h3 class="font-header text-2xl text-white mb-6 uppercase italic">Arena Standings</h3>
+                        <div class="space-y-4 flex-1">
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5">
+                                <div class="flex items-center gap-4"><span class="font-mono text-cyan-400 font-bold">01</span><span class="text-xs font-bold uppercase text-white">Ghost_Wave</span></div>
+                                <span class="px-2 py-1 belt-rank rounded text-[8px] font-black text-yellow-500 border-yellow-500/40 shadow-[0_0_10px_rgba(255,215,0,0.2)]">HEAVYWEIGHT</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5">
+                                <div class="flex items-center gap-4"><span class="font-mono text-gray-500 font-bold">02</span><span class="text-xs font-bold uppercase text-white">MPC_Killer</span></div>
+                                <span class="px-2 py-1 bg-gray-800 rounded text-[8px] font-black text-gray-400 border border-white/10">WELTERWEIGHT</span>
+                            </div>
+                        </div>
+                        <a href="https://discord.gg/spacejamz" target="_blank" class="mt-8 w-full py-4 bg-indigo-600 hover:bg-white hover:text-black text-white font-black uppercase text-[10px] tracking-widest rounded-2xl transition-all text-center">Join Tonight's Flip</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="contact" class="py-32 px-6 relative z-10">
+    <!-- 🧠 PHILOSOPHY: HUMAN SOUL / AI VELOCITY -->
+    <section id="philosophy" class="py-32 px-6 relative z-10 bg-black/50 border-t border-white/5">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-block px-4 py-1 mb-2 border border-white/20 bg-white/5 text-white text-[10px] tracking-[0.4em] uppercase font-bold">
+                SYSTEM STATUS: v1.9 // ALL-GREEN
+            </div>
+            
+            <h1 class="font-header text-7xl md:text-[11.5rem] leading-[0.85] chrome-text tracking-tighter uppercase mb-[-1.5rem]">
+                HUMAN SOUL
+            </h1>
+
+            <!-- COMPACT DIVIDER -->
+            <div class="w-full max-w-[850px] mx-auto my-[-10px] neon-glow opacity-90">
+                <svg width="100%" height="60" viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
+                    <g stroke="url(#cyberGrad)" fill="none" stroke-width="2.5" stroke-linecap="square">
+                        <polyline points="30,35 10,50 30,65" stroke-width="4"/>
+                        <polyline points="60,38 40,50 60,62" /><polyline points="330,38 310,50 330,62" /><polyline points="360,35 340,50 360,65" stroke-width="4"/>
+                        <g>
+                            <path d="M360,50 Q400,15 440,50 Q400,85 360,50 Z" stroke-width="2.5" />
+                            <circle cx="400" cy="50" r="14" stroke-width="1.5" stroke-dasharray="2,2" />
+                            <circle cx="400" cy="50" r="5" fill="url(#cyberGrad)" stroke="none" />
+                        </g>
+                        <polyline points="440,35 460,50 440,65" stroke-width="4"/><polyline points="770,35 790,50 770,65" stroke-width="4"/>
+                    </g>
+                </svg>
+            </div>
+
+            <h1 class="font-header text-7xl md:text-[11.5rem] leading-[0.85] tracking-tighter uppercase mt-[-1rem]">
+                <span class="velocity-text italic">AI VELOCITY</span>
+            </h1>
+            
+            <p class="text-xl md:text-3xl text-gray-400 max-w-3xl mx-auto italic leading-relaxed pt-12 font-light">
+                We aren't replacing artists.<br>
+                <span class="text-white font-bold opacity-100">We are giving them a <span class="text-cyan-400">Supersonic Pipeline.</span></span>
+            </p>
+        </div>
+    </section>
+
+    <!-- THE DOCTRINE -->
+    <section id="doctrine" class="py-32 px-6 relative z-10 backdrop-blur-md border-y border-white/10">
+        <div class="max-w-5xl mx-auto relative z-10">
+            <h2 class="font-header text-6xl text-white mb-16 tracking-tighter underline decoration-white decoration-4 underline-offset-8">THE DOCTRINE</h2>
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="space-y-12">
+                    <div class="border-l-2 border-cyan-400 pl-6 pr-12 bg-cyan-950/20 py-4">
+                        <h3 class="font-header text-3xl text-cyan-400 mb-4 tracking-widest uppercase italic">01. The Sampler Analogy</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">In the 80s, they feared the Synthesizer. In the 90s, they called Sampling "theft." At SpaceJamz, we view AI as the next great instrument—a high-velocity sampler that synthesizes human input into finished assets.</p>
+                    </div>
+                    <div class="border-l-2 border-indigo-400 pl-6 pr-12 bg-indigo-950/20 py-4">
+                        <h3 class="font-header text-3xl text-indigo-400 mb-4 tracking-widest uppercase italic">02. Triple-Threat Economics</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">Traditional labels take 80% and give you back a debt. Here, you keep <span class="text-white font-bold">66% of the Bag.</span> We built the machine to put money in your pocket, not middlemen.</p>
+                    </div>
+                </div>
+                <div class="space-y-12">
+                    <div class="glass-panel p-8 rounded-3xl">
+                        <h3 class="font-header text-3xl text-white mb-4 tracking-widest uppercase italic">03. The Consent Moat</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg font-light">We explicitly reject "Voice Theft." Every Vocal Persona in our Vault is a **Verified DNA** asset. No commercial release occurs without the Artist's digital signature.</p>
+                    </div>
+                    <div class="glass-panel p-8 rounded-3xl">
+                        <h3 class="font-header text-3xl text-white mb-4 tracking-widest uppercase italic">04. Anti-Prompt Jockey</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg font-light">We have no room for "Prompt Jockeys." If you didn't write it, chop it, or flip it, the Machine won't start for you. Prove you have a **Human Soul.**</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-32 px-6 relative z-10 bg-black/80">
         <div class="max-w-3xl mx-auto text-center">
             <h2 class="font-header text-5xl text-white mb-6 uppercase">Intercom</h2>
             <div class="glass-panel p-10 rounded-3xl border border-white/10">
                 <form id="contactForm" class="space-y-6">
-                    <input type="email" id="userEmail" required placeholder="YOUR EMAIL ADDRESS" class="w-full bg-black/50 border border-white/10 p-4 font-mono text-xs focus:border-cyan-500 outline-none transition text-white">
-                    <textarea id="userMessage" required rows="4" placeholder="TRANSMISSION CONTENT" class="w-full bg-black/50 border border-white/10 p-4 font-mono text-xs focus:border-purple-500 outline-none transition text-white"></textarea>
-                    <button type="submit" class="w-full bg-white text-black font-bold py-4 uppercase tracking-[0.3em] text-xs hover:bg-cyan-400 transition">Initiate Contact</button>
+                    <input type="email" id="userEmail" required placeholder="SENDER@NETWORK.COM" class="w-full bg-black/50 border border-white/10 p-4 font-mono text-xs focus:border-cyan-500 outline-none transition text-white rounded-xl">
+                    <textarea id="userMessage" required rows="4" placeholder="COMMAND_INPUT" class="w-full bg-black/50 border border-white/10 p-4 font-mono text-xs focus:border-cyan-500 outline-none transition text-white rounded-xl"></textarea>
+                    <button type="submit" class="w-full bg-white text-black font-bold py-4 uppercase tracking-[0.3em] text-xs hover:bg-cyan-400 transition rounded-xl">Initiate Contact</button>
                 </form>
             </div>
         </div>
     </section>
 
+    <footer class="py-12 text-center text-gray-700 font-mono text-[9px] uppercase tracking-[0.6em] relative z-10">
+        SpaceJamz // Private Production Environment // Protocol v1.9 // Est. 2026
+    </footer>
+
+    <!-- SCRIPTS -->
     <script>
-        // FORM LOGIC: Targets contact.spacejamz@gmail.com
+        // --- LOGO FLOATING LOGIC ---
+        const logo = document.getElementById('logoContainer');
+        let mouseX = 0, mouseY = 0;
+        let logoX = 0, logoY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - window.innerWidth / 2) / 30;
+            mouseY = (e.clientY - window.innerHeight / 2) / 30;
+        });
+
+        function animateLogo() {
+            // Smooth drift logic (Spring interpolation)
+            logoX += (mouseX - logoX) * 0.05;
+            logoY += (mouseY - logoY) * 0.05;
+            
+            // Passive floating sine wave for Zero-G feel
+            const time = Date.now() * 0.0015;
+            const floatY = Math.sin(time) * 20;
+            const floatX = Math.cos(time * 0.7) * 10;
+            const floatRotate = Math.cos(time * 0.4) * 3;
+
+            logo.style.transform = `translate3d(${logoX + floatX}px, ${logoY + floatY}px, 0) rotate(${floatRotate}deg)`;
+            requestAnimationFrame(animateLogo);
+        }
+        animateLogo();
+
+        // --- ARENA LOGIC ---
+        function castVote(option) {
+            const barA = document.getElementById('voteBarA');
+            const barB = document.getElementById('voteBarB');
+            if (option === 'A') {
+                barA.style.width = '60%';
+                barB.style.width = '40%';
+            } else {
+                barA.style.width = '40%';
+                barB.style.width = '60%';
+            }
+        }
+
+        // --- FORM LOGIC ---
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('userEmail').value;
             const message = document.getElementById('userMessage').value;
-            window.location.href = `mailto:contact.spacejamz@gmail.com?subject=SpaceJamz Inquiry&body=Sender: ${email}%0D%0A%0D%0A${message}`;
+            window.location.href = `mailto:contact.spacejamz@gmail.com?subject=SpaceJamz Inquiry&body=From: ${email}%0D%0A%0D%0AMessage: ${message}`;
         });
 
-        // CANVAS ANIMATION (Warp Drive)
+        // --- GLOBAL CANVAS ANIMATION (Cosmic Warp Drive) ---
         const canvas = document.getElementById('warpCanvas');
         const ctx = canvas.getContext('2d');
         let width, height, stars = [];
-        const SPEED = 4;
+        const STAR_COUNT = 650; 
+        const SPEED = 2.4;
 
         function resize() {
             width = window.innerWidth;
@@ -148,19 +385,22 @@
                 const y = (this.y / this.z) * (height / 2) + height / 2;
                 const px = (this.x / this.prevZ) * (width / 2) + width / 2;
                 const py = (this.y / this.prevZ) * (height / 2) + height / 2;
+
                 ctx.beginPath();
-                ctx.strokeStyle = `rgba(0, 242, 255, ${1 - this.z / width})`;
-                ctx.lineWidth = 1.5;
+                const chance = Math.random();
+                if (chance > 0.8) ctx.strokeStyle = `rgba(0, 212, 255, ${1 - this.z / width})`;
+                else if (chance > 0.6) ctx.strokeStyle = `rgba(143, 148, 251, ${1 - this.z / width})`;
+                else ctx.strokeStyle = `rgba(255, 255, 255, ${1 - this.z / width})`;
+                
+                ctx.lineWidth = 1.2;
                 ctx.moveTo(px, py);
                 ctx.lineTo(x, y);
                 ctx.stroke();
             }
         }
-
-        for (let i = 0; i < 450; i++) stars.push(new Star());
-
+        for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
         function animate() {
-            ctx.fillStyle = '#050505';
+            ctx.fillStyle = '#000000'; 
             ctx.fillRect(0, 0, width, height);
             stars.forEach(star => { star.update(); star.draw(); });
             requestAnimationFrame(animate);
