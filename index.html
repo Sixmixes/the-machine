@@ -2,155 +2,97 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://spacejamz.sixmixes.com/">
-    <meta property="og:title" content="SPACEJAMZ | PRODUCTION WAREHOUSE">
-    <meta property="og:description" content="No Output Without Input. Join the Meritocracy. We bridge the gap between AI velocity and Human soul.">
-    
-    <meta property="og:image" content="https://www.sixmixes.com/images/artwork/spacejamz-logo.jpg">
-    
-    <meta name="theme-color" content="#bc13fe">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPACEJAMZ | PRODUCTION WAREHOUSE</title>
+    <title>SPACEJAMZ | THE DOCTRINE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --cyber-blue: #00f2ff;
-            --cyber-purple: #bc13fe;
-            --cyber-pink: #ff003c;
-        }
         body { background-color: #050505; color: #e2e8f0; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
         .font-header { font-family: 'Bebas Neue', sans-serif; }
-        
-        /* BACKGROUND CANVAS */
-        #bgCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.4; }
-        
-        /* SCANLINES */
+        .factory-gradient { background: linear-gradient(to right, #00f2ff, #bc13fe, #ff003c); }
+        .glass-panel { background: rgba(15, 15, 20, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .scanlines {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 100%);
-            background-size: 100% 4px; pointer-events: none; z-index: 50; opacity: 0.3;
-        }
-
-        .glass-panel {
-            background: rgba(10, 10, 12, 0.7); backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: repeating-linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 100%);
+            background-size: 100% 4px; pointer-events: none; z-index: 50; opacity: 0.1;
         }
     </style>
 </head>
 <body class="selection:bg-cyan-500 selection:text-black">
-
-    <div class="fixed top-0 left-0 w-full h-full z-[-1] overflow-hidden bg-black">
-        <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-60">
-            <source src="./images/hero-loop.mp4" type="video/mp4">
-        </video>
-        <div class="absolute inset-0 bg-black/70"></div>
-    </div>
-
     <div class="scanlines"></div>
 
-    <header class="fixed top-0 left-0 w-full z-40 border-b border-white/5 bg-black/80 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 w-full z-40 bg-black/80 backdrop-blur-md border-b border-white/5 h-20 flex items-center">
+        <div class="max-w-7xl mx-auto px-6 w-full flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <div class="w-6 h-6 bg-cyan-400 rotate-45 animate-pulse"></div>
-                <span class="font-header text-3xl tracking-widest text-white">SPACE<span class="text-cyan-400">JAMZ</span></span>
+                <div class="w-6 h-6 bg-cyan-400 rotate-45"></div>
+                <span class="font-header text-3xl tracking-widest text-white uppercase">Space<span class="text-cyan-400">Jamz</span></span>
             </div>
-            <nav class="hidden md:flex space-x-10 text-sm tracking-[0.2em] font-bold uppercase">
-                <a href="#mission" class="hover:text-purple-400 transition">Mission</a>
-                <a href="#culture" class="hover:text-cyan-400 transition">Protocol</a>
-                <a href="#join" class="border border-pink-500 text-pink-500 px-4 py-1 hover:bg-pink-500 hover:text-white transition">Initialize</a>
+            <nav class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                <a href="#doctrine" class="hover:text-cyan-400 transition">The Doctrine</a>
+                <a href="#factory" class="hover:text-purple-400 transition">Warehouse</a>
+                <a href="https://discord.gg/uT8UtWcJs4" target="_blank" class="text-white border border-white/20 px-4 py-1 hover:bg-white hover:text-black transition">Apply</a>
             </nav>
         </div>
     </header>
 
-    <section class="min-h-screen flex items-center justify-center pt-20 px-6 relative">
-        <div class="relative z-10 max-w-5xl text-center">
-            <div class="inline-block px-3 py-1 mb-6 border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs tracking-[0.3em] uppercase">
-                System Status: Online // Warehouse Active
+    <!-- HERO -->
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20">
+        <div class="max-w-6xl z-10">
+            <div class="inline-block px-4 py-1 mb-8 border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-[10px] tracking-[0.4em] uppercase font-bold">
+                SYSTEM STATUS: v1.9 // ALL-GREEN
             </div>
-            
-            <h1 class="font-header text-6xl md:text-9xl leading-[0.85] text-white mb-8">
-                WELCOME TO <br> 
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 cursor-default" data-value="THE MACHINE">
-                    THE MACHINE
-                </span>
+            <h1 class="font-header text-8xl md:text-[12rem] leading-[0.8] text-white mb-10 tracking-tighter uppercase">
+                HUMAN SOUL<br><span class="text-transparent bg-clip-text factory-gradient italic">AI VELOCITY</span>
             </h1>
-            
-            <p class="text-lg md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed border-l-2 border-cyan-400 pl-6">
-                SpaceJamz is not a server. It is a <span class="text-white font-bold">Production Warehouse</span>. 
-                <br>We bridge the gap between AI velocity and Human soul.
+            <p class="text-xl md:text-3xl text-gray-500 max-w-3xl mx-auto italic leading-relaxed">
+                We aren't replacing artists. We are giving them a <span class="text-white font-bold">Supersonic Pipeline.</span>
             </p>
-
-            <a href="https://discord.gg/uT8UtWcJs4" target="_blank" class="group relative inline-block px-10 py-5 bg-cyan-400 text-black font-header text-2xl uppercase tracking-widest overflow-hidden hover:bg-white transition-colors shadow-[0_0_30px_rgba(0,242,255,0.4)]">
-                <span class="relative z-10">ENTER THE AIRLOCK</span>
-            </a>
         </div>
     </section>
 
-    <section id="mission" class="py-32 px-6 border-y border-white/5 bg-zinc-900/20">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
-            <div class="glass-panel p-10 border-t-4 border-t-purple-500 relative group hover:-translate-y-2 transition-transform duration-500">
-                <div class="absolute top-4 right-4 text-4xl opacity-10 font-header">01</div>
-                <h3 class="font-header text-4xl text-white mb-4" data-value="PATH A: DRAFTING">PATH A: DRAFTING</h3>
-                <p class="text-gray-400 text-lg">We use generative audio to sketch. We rapid-prototype melodies, flows, and structures at the speed of thought. The machine provides the clay.</p>
-            </div>
-            <div class="glass-panel p-10 border-t-4 border-t-green-500 relative group hover:-translate-y-2 transition-transform duration-500">
-                <div class="absolute top-4 right-4 text-4xl opacity-10 font-header">02</div>
-                <h3 class="font-header text-4xl text-white mb-4" data-value="PATH B: RELEASE">PATH B: RELEASE</h3>
-                <p class="text-gray-400 text-lg">We strip the robot voice away. Real humans record real vocals. Real engineers mix the stems. The final product is 100% organic, designed by the machine.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="culture" class="py-32 px-6">
-        <div class="max-w-7xl mx-auto text-center mb-20">
-            <h2 class="font-header text-6xl md:text-8xl text-white mb-4" data-value="THE MERITOCRACY">THE MERITOCRACY</h2>
-            <p class="text-xl text-pink-500 tracking-widest uppercase">"No Output Without Input."</p>
-        </div>
-
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-3 gap-1">
-            <div class="bg-zinc-900/50 p-12 border border-white/5 group hover:bg-zinc-800 transition-colors">
-                <h4 class="text-cyan-400 mb-4 tracking-widest text-sm">01 // OPEN ACCESS</h4>
-                <h3 class="font-header text-5xl text-white mb-6">THE LOBBY</h3>
-                <p class="text-gray-400">The neutral zone. Submit your portfolio, show your hunger, and prove your worth here.</p>
-            </div>
-            <div class="bg-zinc-900 p-12 border border-cyan-500/30 group relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-purple-500"></div>
-                <h4 class="text-purple-400 mb-4 tracking-widest text-sm">02 // RESTRICTED</h4>
-                <h3 class="font-header text-5xl text-white mb-6">THE FACTORY</h3>
-                <p class="text-gray-200">Where the work happens. Forged in collaboration. Only high-signal contributors remain.</p>
-            </div>
-            <div class="bg-black p-12 border border-white/5 group grayscale hover:grayscale-0 transition-all">
-                <h4 class="text-pink-500 mb-4 tracking-widest text-sm">03 // PURGE ZONE</h4>
-                <h3 class="font-header text-5xl text-white mb-6 opacity-50">THE BENCH</h3>
-                <p class="text-gray-500">Silence is a choice. Lack of input leads to disconnection. Reclaim your seat or be purged.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="join" class="py-40 px-6 relative overflow-hidden flex items-center justify-center">
-        <div class="relative z-10 glass-panel p-12 md:p-20 text-center max-w-4xl border border-white/10">
-            <h2 class="font-header text-6xl md:text-8xl text-white mb-10 tracking-tighter" data-value="JOIN THE SEQUENCE">
-                JOIN THE SEQUENCE
-            </h2>
+    <!-- THE DOCTRINE (THE ETHICAL CHARTER) -->
+    <section id="doctrine" class="py-32 px-6 bg-[#0a0a0c] border-y border-white/5 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto relative z-10">
+            <h2 class="font-header text-6xl text-white mb-16 tracking-tighter underline decoration-cyan-500 decoration-8">THE DOCTRINE</h2>
             
-            <a href="https://discord.gg/uT8UtWcJs4" target="_blank" class="block w-full py-6 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-white hover:to-white hover:text-black text-white font-header text-3xl uppercase tracking-widest transition-all duration-300 shadow-[0_0_30px_rgba(0,242,255,0.3)]">
-                LAUNCH DISCORD
-            </a>
-            
-            <div class="mt-8 flex justify-center gap-8 text-xs font-mono text-gray-500 uppercase tracking-widest">
-                <span>Status: Recruitment Active</span>
-                <span>Req: Proof of Life</span>
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="space-y-12">
+                    <div>
+                        <h3 class="font-header text-3xl text-cyan-400 mb-4 tracking-widest uppercase italic">01. The Sampler Analogy</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">
+                            In the 80s, they feared the Synthesizer. In the 90s, they called Sampling "theft." At SpaceJamz, we view AI as the next great instrument—a high-velocity sampler that synthesizes human input into finished assets. We don't use AI to escape the art; we use it to accelerate the output.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="font-header text-3xl text-purple-400 mb-4 tracking-widest uppercase italic">02. Triple-Threat Economics</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">
+                            Traditional labels take 80% and give you back a debt. In the SpaceJamz Warehouse, if you are the Producer, Writer, and Artist, you keep <span class="text-white font-bold">66% of the Bag.</span> We built the machine to put money in your pocket, not to line the pockets of middlemen.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-12">
+                    <div class="glass-panel p-8 rounded-3xl border-l-4 border-l-pink-500">
+                        <h3 class="font-header text-3xl text-pink-500 mb-4 tracking-widest uppercase italic">03. The Consent Moat</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">
+                            We explicitly reject "Voice Theft." Every Vocal Persona in our Vault is a **Verified DNA** asset. No commercial release occurs without the Artist's digital signature. We protect your likeness so you can focus on the hits.
+                        </p>
+                    </div>
+                    <div class="glass-panel p-8 rounded-3xl border-l-4 border-l-orange-500">
+                        <h3 class="font-header text-3xl text-orange-400 mb-4 tracking-widest uppercase italic">04. Anti-Prompt Jockey</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">
+                            We have no room for "Prompt Jockeys." If you didn't write it, chop it, or flip it, the Machine won't start for you. The Arena exists to prove you have a **Human Soul** before we grant you **AI Velocity.**
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-8 text-center text-xs text-gray-600 font-mono border-t border-white/5">
-        SPACEJAMZ VISUAL SUITE // EST 2026
+    <!-- FOOTER -->
+    <footer class="py-12 text-center text-gray-700 font-mono text-[9px] uppercase tracking-[0.6em]">
+        SpaceJamz // Private Production Environment // Protocol v1.9 // Est. 2026
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
