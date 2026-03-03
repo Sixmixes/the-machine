@@ -64,10 +64,10 @@
             text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
         }
 
-        /* Refined Floating Container */
+        /* Layering Fix: Lowered z-index for the logo wrap */
         .floating-wrap {
             perspective: 1200px;
-            z-index: 10;
+            z-index: 1; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -79,6 +79,12 @@
             will-change: transform;
             filter: drop-shadow(0 20px 50px rgba(0, 212, 255, 0.3));
             transform-style: preserve-3d;
+        }
+
+        /* Explicit foreground layering for text and divider */
+        .z-top {
+            position: relative;
+            z-index: 10;
         }
 
         .arena-card {
@@ -125,15 +131,15 @@
                 COMMUNITY HUB // PROTOCOL v1.9
             </div>
             
-            <!-- FLOATING CHROME LOGO (Fixed Path and Case Sensitivity) -->
+            <!-- FLOATING CHROME LOGO (Now layered behind) -->
             <div class="floating-wrap">
                 <div id="logoContainer" class="floating-logo mb-[-2rem]">
                     <img src="images/logo cosmos.PNG" alt="SPACEJAMZ" class="w-[90vw] max-w-[580px] md:max-w-[780px] h-auto pointer-events-none select-none">
                 </div>
             </div>
 
-            <!-- COMPACT DIVIDER -->
-            <div class="w-full max-w-[850px] mx-auto my-[-10px] neon-glow opacity-80 pointer-events-none">
+            <!-- COMPACT DIVIDER (Moved to foreground with z-top) -->
+            <div class="w-full max-w-[850px] mx-auto my-[-10px] neon-glow opacity-80 pointer-events-none z-top">
                 <svg width="100%" height="60" viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="cyberGrad" x1="0%" y1="0%" x2="100%" y2="0%">
