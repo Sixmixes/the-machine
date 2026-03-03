@@ -7,28 +7,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #050505; color: #e2e8f0; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; margin: 0; }
+        body { background-color: #050505; color: #e2e8f0; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
         .font-header { font-family: 'Bebas Neue', sans-serif; }
         
-        .velocity-text { 
+        /* Fixed Velocity Gradient & Animation */
+        .factory-gradient { 
             background: linear-gradient(90deg, #00f2ff, #bc13fe, #ff003c, #00f2ff);
             background-size: 300% 100%;
             animation: flow 4s linear infinite;
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
-            /* Critical fix for Italic 'Y' clipping */
-            display: table; 
-            margin: 0 auto;
-            padding-right: 0.25em; 
-            line-height: 1.1;
-        }
-
-        .hero-divider {
-            width: 300px;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.3);
-            margin: 1.5rem auto;
         }
         
         @keyframes flow {
@@ -36,17 +24,26 @@
             100% { background-position: 100% 50%; }
         }
 
-        #warpCanvas {
+        .glass-panel { background: rgba(15, 15, 20, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        /* Hero Loop Animation: Stars/Warp Effect */
+        .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0;
-            pointer-events: none;
+            background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+            z-index: -1;
         }
 
-        .glass-panel { background: rgba(15, 15, 20, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        /* Scanline Overlay */
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 100%);
+            background-size: 100% 4px; pointer-events: none; z-index: 50; opacity: 0.1;
+        }
     </style>
 </head>
 <body class="selection:bg-cyan-500 selection:text-black">
+    <div class="scanlines"></div>
 
     <header class="fixed top-0 left-0 w-full z-40 bg-black/80 backdrop-blur-md border-b border-white/5 h-20 flex items-center">
         <div class="max-w-7xl mx-auto px-6 w-full flex justify-between items-center">
@@ -56,116 +53,77 @@
             </div>
             <nav class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-500">
                 <a href="#doctrine" class="hover:text-cyan-400 transition">The Doctrine</a>
-                <a href="#contact" class="hover:text-pink-400 transition">Contact</a>
-                <a href="https://discord.gg/spacejamz" target="_blank" class="text-white border border-white/20 px-4 py-1 hover:bg-white hover:text-black transition">Apply</a>
+                <a href="#factory" class="hover:text-purple-400 transition">Warehouse</a>
+                <a href="https://discord.gg/uT8UtWcJs4" target="_blank" class="text-white border border-white/20 px-4 py-1 hover:bg-white hover:text-black transition">Apply</a>
             </nav>
         </div>
     </header>
 
-    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative bg-black">
-        <canvas id="warpCanvas"></canvas>
-        
-        <div class="max-w-7xl z-10 pointer-events-none">
-            <div class="inline-block px-4 py-1 mb-8 border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-[10px] tracking-[0.4em] uppercase font-bold">
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
+        <div class="hero-bg"></div>
+        <div class="max-w-6xl z-10 mt-[-4rem]">
+            <div class="inline-block px-4 py-1 mb-12 border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-[10px] tracking-[0.4em] uppercase font-bold">
                 SYSTEM STATUS: v1.9 // ALL-GREEN
             </div>
             
-            <h1 class="font-header text-7xl md:text-[11rem] leading-none text-white tracking-tighter uppercase">
+            <h1 class="font-header text-8xl md:text-[12rem] leading-[0.8] text-white tracking-tighter uppercase text-center mt-[-2rem]">
                 HUMAN SOUL
-                <div class="hero-divider"></div>
-                <span class="velocity-text italic">AI VELOCITY</span>
             </h1>
             
-            <p class="text-xl md:text-3xl text-gray-500 max-w-3xl mx-auto italic leading-relaxed pt-8">
-                We aren't replacing artists.<br>
-                <span class="text-white font-bold opacity-80">We are giving them a Supersonic Pipeline.</span>
+            <div class="flex justify-center my-6">
+                <img src="images/transparent-backround.png" alt="Tech Ornamental Divider" class="w-[70%] max-w-[600px] h-auto">
+            </div>
+
+            <h1 class="font-header text-7xl md:text-[11rem] italic leading-[1.0] text-transparent bg-clip-text factory-gradient tracking-tighter uppercase text-center">
+                AI VELOCITY
+            </h1>
+            
+            <p class="text-xl md:text-3xl text-gray-500 max-w-3xl mx-auto italic leading-relaxed pt-10">
+                We aren't replacing artists. We are giving them a <span class="text-white font-bold">Supersonic Pipeline.</span>
             </p>
         </div>
     </section>
 
-    <section id="doctrine" class="py-32 px-6 bg-[#0a0a0c] border-y border-white/5 relative z-10">
-        <div class="max-w-5xl mx-auto">
-             <h2 class="font-header text-6xl text-white mb-16 tracking-tighter underline decoration-cyan-500 decoration-8">THE DOCTRINE</h2>
-             <div class="grid md:grid-cols-2 gap-16 text-gray-400">
-                <p>AI is the next great instrument—a high-velocity sampler.</p>
-                <p>You keep 66% of the Bag. Built for creators.</p>
-             </div>
-        </div>
-    </section>
+    <section id="doctrine" class="py-32 px-6 bg-[#0a0a0c] border-y border-white/5 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto relative z-10">
+            <h2 class="font-header text-6xl text-white mb-16 tracking-tighter underline decoration-cyan-500 decoration-8">THE DOCTRINE</h2>
+            
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="space-y-12">
+                    <div>
+                        <h3 class="font-header text-3xl text-cyan-400 mb-4 tracking-widest uppercase italic">01. The Sampler Analogy</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">
+                            In the 80s, they feared the Synthesizer. In the 90s, they called Sampling "theft." At SpaceJamz, we view AI as the next great instrument—a high-velocity sampler that synthesizes human input into finished assets. We don't use AI to escape the art; we use it to accelerate the output.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="font-header text-3xl text-purple-400 mb-4 tracking-widest uppercase italic">02. Triple-Threat Economics</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">
+                            Traditional labels take 80% and give you back a debt. In the SpaceJamz Warehouse, if you are the Producer, Writer, and Artist, you keep <span class="text-white font-bold">66% of the Bag.</span> We built the machine to put money in your pocket, not to line the pockets of middlemen.
+                        </p>
+                    </div>
+                </div>
 
-    <section id="contact" class="py-32 px-6 relative z-10">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="font-header text-5xl text-white mb-6 uppercase">Intercom</h2>
-            <div class="glass-panel p-10 rounded-3xl border border-white/10">
-                <form id="contactForm" class="space-y-6">
-                    <input type="email" id="userEmail" required placeholder="YOUR EMAIL ADDRESS" class="w-full bg-black/50 border border-white/10 p-4 font-mono text-xs focus:border-cyan-500 outline-none transition text-white">
-                    <textarea id="userMessage" required rows="4" placeholder="TRANSMISSION CONTENT" class="w-full bg-black/50 border border-white/10 p-4 font-mono text-xs focus:border-purple-500 outline-none transition text-white"></textarea>
-                    <button type="submit" class="w-full bg-white text-black font-bold py-4 uppercase tracking-[0.3em] text-xs hover:bg-cyan-400 transition">Initiate Contact</button>
-                </form>
+                <div class="space-y-12">
+                    <div class="glass-panel p-8 rounded-3xl border-l-4 border-l-pink-500">
+                        <h3 class="font-header text-3xl text-pink-500 mb-4 tracking-widest uppercase italic">03. The Consent Moat</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">
+                            We explicitly reject "Voice Theft." Every Vocal Persona in our Vault is a **Verified DNA** asset. No commercial release occurs without the Artist's digital signature. We protect your likeness so you can focus on the hits.
+                        </p>
+                    </div>
+                    <div class="glass-panel p-8 rounded-3xl border-l-4 border-l-orange-500">
+                        <h3 class="font-header text-3xl text-orange-400 mb-4 tracking-widest uppercase italic">04. Anti-Prompt Jockey</h3>
+                        <p class="text-gray-400 leading-relaxed text-lg">
+                            We have no room for "Prompt Jockeys." If you didn't write it, chop it, or flip it, the Machine won't start for you. The Arena exists to prove you have a **Human Soul** before we grant you **AI Velocity.**
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <script>
-        // FORM LOGIC: Targets contact.spacejamz@gmail.com
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('userEmail').value;
-            const message = document.getElementById('userMessage').value;
-            window.location.href = `mailto:contact.spacejamz@gmail.com?subject=SpaceJamz Inquiry&body=Sender: ${email}%0D%0A%0D%0A${message}`;
-        });
-
-        // CANVAS ANIMATION (Warp Drive)
-        const canvas = document.getElementById('warpCanvas');
-        const ctx = canvas.getContext('2d');
-        let width, height, stars = [];
-        const SPEED = 4;
-
-        function resize() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        class Star {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = (Math.random() - 0.5) * width;
-                this.y = (Math.random() - 0.5) * height;
-                this.z = Math.random() * width;
-                this.prevZ = this.z;
-            }
-            update() {
-                this.prevZ = this.z;
-                this.z -= SPEED;
-                if (this.z <= 0) this.reset();
-            }
-            draw() {
-                const x = (this.x / this.z) * (width / 2) + width / 2;
-                const y = (this.y / this.z) * (height / 2) + height / 2;
-                const px = (this.x / this.prevZ) * (width / 2) + width / 2;
-                const py = (this.y / this.prevZ) * (height / 2) + height / 2;
-                ctx.beginPath();
-                ctx.strokeStyle = `rgba(0, 242, 255, ${1 - this.z / width})`;
-                ctx.lineWidth = 1.5;
-                ctx.moveTo(px, py);
-                ctx.lineTo(x, y);
-                ctx.stroke();
-            }
-        }
-
-        for (let i = 0; i < 450; i++) stars.push(new Star());
-
-        function animate() {
-            ctx.fillStyle = '#050505';
-            ctx.fillRect(0, 0, width, height);
-            stars.forEach(star => { star.update(); star.draw(); });
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
+    <footer class="py-12 text-center text-gray-700 font-mono text-[9px] uppercase tracking-[0.6em]">
+        SpaceJamz // Private Production Environment // Protocol v1.9 // Est. 2026
+    </footer>
 </body>
 </html>
