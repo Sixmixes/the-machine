@@ -1,76 +1,73 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- EFFECT 1: DATA STREAM CANVAS (Square Particles) ---
-    const canvas = document.getElementById('bgCanvas');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        let width, height, particles = [];
+/**
+ * SpaceJamz Warp Drive Animation
+ * Captivates the viewer with a looping starfield effect
+ */
+const canvas = document.getElementById('warpCanvas');
+const ctx = canvas.getContext('2d');
 
-        const initCanvas = () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            particles = Array.from({ length: 50 }, () => ({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                size: Math.random() * 4 + 1,
-                speed: Math.random() * -1 - 0.5,
-                color: ['#00f2ff', '#bc13fe', '#ff003c'][Math.floor(Math.random() * 3)]
-            }));
-        };
+let width, height, stars = [];
+const STAR_COUNT = 400;
+const SPEED = 2;
 
-        const animateCanvas = () => {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => {
-                p.y += p.speed;
-                if (p.y < 0) p.y = height + p.size;
-                ctx.fillStyle = p.color;
-                ctx.globalAlpha = 0.4;
-                ctx.fillRect(p.x, p.y, p.size, p.size); 
-            });
-            requestAnimationFrame(animateCanvas);
-        };
+// Resize handler
+function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+}
 
-        window.addEventListener('resize', initCanvas);
-        initCanvas();
-        animateCanvas();
+window.addEventListener('resize', resize);
+resize();
+
+// Star Object
+class Star {
+    constructor() {
+        this.reset();
     }
 
-    // --- EFFECT 2: THE CIPHER (FIXED) ---
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_#@";
-    
-    // Only target elements that explicitly have a data-value
-    const targets = document.querySelectorAll("[data-value]");
-    
-    targets.forEach(element => {
-        element.onmouseover = event => {
-            // Stop any running animation on this element to prevent glitch buildup
-            if (element.dataset.interval) {
-                clearInterval(parseInt(element.dataset.interval));
-            }
+    reset() {
+        this.x = (Math.random() - 0.5) * width;
+        this.y = (Math.random() - 0.5) * height;
+        this.z = Math.random() * width;
+        this.prevZ = this.z;
+    }
 
-            let iterations = 0;
-            const originalText = element.dataset.value;
-            
-            const interval = setInterval(() => {
-                element.innerText = originalText
-                    .split("")
-                    .map((letter, index) => {
-                        if(index < iterations) {
-                            return originalText[index];
-                        }
-                        return letters[Math.floor(Math.random() * letters.length)];
-                    })
-                    .join("");
-                
-                if(iterations >= originalText.length) { 
-                    clearInterval(interval);
-                }
-                
-                iterations += 1 / 3; 
-            }, 30);
+    update() {
+        this.prevZ = this.z;
+        this.z -= SPEED;
+        if (this.z <= 0) this.reset();
+    }
 
-            // Store interval ID so we can clear it on next hover
-            element.dataset.interval = interval;
-        }
+    draw() {
+        const x = (this.x / this.z) * (width / 2) + width / 2;
+        const y = (this.y / this.z) * (height / 2) + height / 2;
+        
+        const px = (this.x / this.prevZ) * (width / 2) + width / 2;
+        const py = (this.y / this.prevZ) * (height / 2) + height / 2;
+
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(0, 242, 255, ${1 - this.z / width})`;
+        ctx.lineWidth = 2;
+        ctx.moveTo(px, py);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
+}
+
+// Initialize
+for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
+
+function animate() {
+    ctx.fillStyle = '#050505'; // Match body background
+    ctx.fillRect(0, 0, width, height);
+    
+    stars.forEach(star => {
+        star.update();
+        star.draw();
     });
-});
+    
+    requestAnimationFrame(animate);
+}
+
+animate();
