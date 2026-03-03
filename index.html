@@ -1,137 +1,52 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPACEJAMZ | THE DOCTRINE</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { background-color: #050505; color: #e2e8f0; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
-        .font-header { font-family: 'Bebas Neue', sans-serif; }
+<style>
+    /* ... existing styles ... */
+    
+    .hero-container {
+        position: relative;
+        overflow: hidden; /* Keeps the canvas contained */
+    }
+
+    #warpCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    /* THE VELOCITY FIX */
+    .velocity-text {
+        padding-right: 0.15em; /* Creates breathing room for the italic 'y' */
+        padding-bottom: 0.1em;
+        line-height: 1.1;      /* Prevents vertical clipping */
+        display: inline-block;
+        background: linear-gradient(90deg, #00f2ff, #bc13fe, #ff003c, #00f2ff);
+        background-size: 300% 100%;
+        animation: flow 4s linear infinite;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+</style>
+
+<section class="hero-container min-h-screen flex flex-col items-center justify-center text-center px-6">
+    <canvas id="warpCanvas"></canvas>
+    
+    <div class="max-w-6xl z-10 pointer-events-none">
+        <div class="inline-block px-4 py-1 mb-8 border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-[10px] tracking-[0.4em] uppercase font-bold">
+            SYSTEM STATUS: v1.9 // ALL-GREEN
+        </div>
         
-        /* Fixed Velocity Gradient & Animation */
-        .factory-gradient { 
-            background: linear-gradient(90deg, #00f2ff, #bc13fe, #ff003c, #00f2ff);
-            background-size: 300% 100%;
-            animation: flow 4s linear infinite;
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
+        <h1 class="font-header text-7xl md:text-[11rem] text-white tracking-tighter uppercase">
+            HUMAN SOUL<br>
+            <span class="velocity-text italic uppercase">AI VELOCITY</span>
+        </h1>
         
-        @keyframes flow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
+        <p class="text-xl md:text-3xl text-gray-500 max-w-3xl mx-auto italic leading-relaxed">
+            We aren't replacing artists. We are giving them a <span class="text-white font-bold">Supersonic Pipeline.</span>
+        </p>
+    </div>
+</section>
 
-        .glass-panel { background: rgba(15, 15, 20, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        
-        /* Hero Loop Animation: Stars/Warp Effect */
-        .hero-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
-            z-index: -1;
-        }
-
-        /* Scanline Overlay */
-        .scanlines {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 100%);
-            background-size: 100% 4px; pointer-events: none; z-index: 50; opacity: 0.1;
-        }
-    </style>
-</head>
-<body class="selection:bg-cyan-500 selection:text-black">
-    <div class="scanlines"></div>
-
-    <header class="fixed top-0 left-0 w-full z-40 bg-black/80 backdrop-blur-md border-b border-white/5 h-20 flex items-center">
-        <div class="max-w-7xl mx-auto px-6 w-full flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="w-6 h-6 bg-cyan-400 rotate-45 animate-pulse"></div>
-                <span class="font-header text-3xl tracking-widest text-white uppercase">Space<span class="text-cyan-400">Jamz</span></span>
-            </div>
-            <nav class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                <a href="#doctrine" class="hover:text-cyan-400 transition">The Doctrine</a>
-                <a href="#contact" class="hover:text-pink-400 transition">Contact</a>
-                <a href="https://discord.gg/uT8UtWcJs4" target="_blank" class="text-white border border-white/20 px-4 py-1 hover:bg-white hover:text-black transition">Apply</a>
-            </nav>
-        </div>
-    </header>
-
-    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
-        <div class="hero-bg"></div>
-        <div class="max-w-6xl z-10">
-            <div class="inline-block px-4 py-1 mb-8 border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-[10px] tracking-[0.4em] uppercase font-bold">
-                SYSTEM STATUS: v1.9 // ALL-GREEN
-            </div>
-            
-            <h1 class="font-header text-7xl md:text-[11rem] leading-[0.85] text-white mb-10 tracking-tighter uppercase pb-4">
-                HUMAN SOUL<br>
-                <span class="text-transparent bg-clip-text factory-gradient italic inline-block">AI VELOCITY</span>
-            </h1>
-            
-            <p class="text-xl md:text-3xl text-gray-500 max-w-3xl mx-auto italic leading-relaxed">
-                We aren't replacing artists. We are giving them a <span class="text-white font-bold">Supersonic Pipeline.</span>
-            </p>
-        </div>
-    </section>
-
-    <section id="doctrine" class="py-32 px-6 bg-[#0a0a0c] border-y border-white/5 relative overflow-hidden">
-        <div class="max-w-5xl mx-auto relative z-10">
-            <h2 class="font-header text-6xl text-white mb-16 tracking-tighter underline decoration-cyan-500 decoration-8">THE DOCTRINE</h2>
-            
-            <div class="grid md:grid-cols-2 gap-16">
-                <div class="space-y-12">
-                    <div>
-                        <h3 class="font-header text-3xl text-cyan-400 mb-4 tracking-widest uppercase italic">01. The Sampler Analogy</h3>
-                        <p class="text-gray-400 leading-relaxed text-lg">
-                            In the 80s, they feared the Synthesizer. In the 90s, they called Sampling "theft." AI is simply the next instrument—a high-velocity sampler.
-                        </p>
-                    </div>
-                    <div>
-                        <h3 class="font-header text-3xl text-purple-400 mb-4 tracking-widest uppercase italic">02. Triple-Threat Economics</h3>
-                        <p class="text-gray-400 leading-relaxed text-lg">
-                            If you are the Producer, Writer, and Artist, you keep <span class="text-white font-bold">66% of the Bag.</span> We build the machine for the creator.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="space-y-12">
-                    <div class="glass-panel p-8 rounded-3xl border-l-4 border-l-pink-500">
-                        <h3 class="font-header text-3xl text-pink-500 mb-4 tracking-widest uppercase italic">03. The Consent Moat</h3>
-                        <p class="text-gray-400 leading-relaxed text-lg">
-                            Every Vocal Persona is a **Verified DNA** asset. No commercial release occurs without the Artist's digital signature.
-                        </p>
-                    </div>
-                    <div class="glass-panel p-8 rounded-3xl border-l-4 border-l-orange-500">
-                        <h3 class="font-header text-3xl text-orange-400 mb-4 tracking-widest uppercase italic">04. Anti-Prompt Jockey</h3>
-                        <p class="text-gray-400 leading-relaxed text-lg">
-                            If you didn't write it, chop it, or flip it, the Machine won't start. The Arena requires a **Human Soul.**
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-32 px-6">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="font-header text-5xl text-white mb-6 uppercase">Intercom</h2>
-            <p class="text-gray-400 mb-10 tracking-widest text-sm uppercase">Questions // Concerns // Protocol Inquiries</p>
-            
-            <div class="glass-panel p-10 rounded-3xl border border-white/10">
-                <form class="space-y-6">
-                    <input type="email" placeholder="ENCRYPTED EMAIL ADDRESS" class="w-full bg-black/50 border border-white/10 p-4 font-mono text-xs focus:border-cyan-500 outline-none transition text-white">
-                    <textarea rows="4" placeholder="TRANSMISSION CONTENT" class="w-full bg-black/50 border border-white/10 p-4 font-mono text-xs focus:border-purple-500 outline-none transition text-white"></textarea>
-                    <button class="w-full factory-gradient text-white font-bold py-4 uppercase tracking-[0.3em] text-xs hover:opacity-80 transition">Initiate Contact</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-12 text-center text-gray-700 font-mono text-[9px] uppercase tracking-[0.6em]">
-        SpaceJamz // Private Production Environment // Protocol v1.9 // Est. 2026
-    </footer>
-</body>
-</html>
+<script src="warp-drive.js"></script>
